@@ -1,3 +1,21 @@
+const cells = document.querySelectorAll('.cell');
+
+cells.forEach(item => {
+    item.addEventListener('click', move)
+})
+
+function move(e, vr) {
+    console.log(e.target.getAttribute('data'));
+     board.arr[parseInt(e.target.getAttribute('data'))] = 'x';
+     e.target.innerText = 'x';
+}
+
+// function(e) {
+//     console.log(e.target.getAttribute('data'));
+//     board.arr[parseInt(e.target.getAttribute('data'))] = 'x';
+//     e.target.innerText = 'x';
+// })
+
 //Create board
 function createBoard() {
     const arr = [];
@@ -41,13 +59,18 @@ function checkWin(board) {
 const board = createBoard();
 
 //Looping game untill win
-while (!checkWin(board.arr)) {
-    let choice = prompt('Type choice', '0, x');
-    choice = choice.split(', ');
-    board.setMove(parseInt(choice[0]), choice[1]);
-    console.log(board.arr);
-    console.log(checkWin(board.arr));
-}
+// while (!checkWin(board.arr)) {
+//     let choice = prompt('Type choice', '0, x');
+//     choice = choice.split(', ');
+//     board.setMove(parseInt(choice[0]), choice[1]);
+//     console.log(board.arr);
+//     console.log(checkWin(board.arr));
+// }
+
+
+
+
+
 //const talk = prompt('Type choice', '');
 //console.log(talk.split(', '));
 

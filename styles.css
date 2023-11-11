@@ -1,0 +1,11 @@
+.container {
+    display: grid;
+    grid-template-columns: 100px 100px 100px;
+}
+button {
+    height: 100px;
+}
+.cell {
+    background-color: aqua;
+    font-size: 70px;
+}
