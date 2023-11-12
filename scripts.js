@@ -1,24 +1,34 @@
 const cells = document.querySelectorAll('.cell');
+let turn = 'x';
+let beforeTurn = turn;
+let setX = 0;
 
 cells.forEach(item => {
     item.addEventListener('click', move)
 })
 
-function move(e, vr) {
-    console.log(e.target.getAttribute('data'));
-     board.arr[parseInt(e.target.getAttribute('data'))] = 'x';
-     e.target.innerText = 'x';
+const board = createBoard();
+
+
+function move(e) {
+    
+    if (board.arr[parseInt(e.target.getAttribute('data'))] == '-') {
+        console.log(e.target.getAttribute('data'));
+        board.arr[parseInt(e.target.getAttribute('data'))] = turn;
+        e.target.innerText = turn;
+        beforeTurn = turn;
+        (turn == 'x') ? turn = 'o' : turn = 'x';
+        console.log(checkWin(board.arr));
+    }
+    
+    //board.setMove(parseInt(e.target.getAttribute('data')), 'x');
+    
 }
 
-// function(e) {
-//     console.log(e.target.getAttribute('data'));
-//     board.arr[parseInt(e.target.getAttribute('data'))] = 'x';
-//     e.target.innerText = 'x';
-// })
 
 //Create board
 function createBoard() {
-    const arr = [];
+    let arr = [];
     for (let i = 0; i < 9; i++) {
         arr.push('-');
     }
@@ -33,7 +43,7 @@ function createBoard() {
 
 // Checking all possible combinations
 function checkWin(board) {
-    let setX = 0;
+
     const arrWin = [
         [0, 1, 2],
         [3, 4, 5],
@@ -46,17 +56,24 @@ function checkWin(board) {
     ]
 
     for (let i = 0; i < arrWin.length; i++) {
+        let setX = 0;
         for (let x = 0; x < 3; x++) {
-            if(board[i][x] === 'x') setX++;
+            console.log(turn);
+            if(board[arrWin[i][x]] == beforeTurn) {
+                setX++;
+            }
+            if (setX > 2) {
+                console.log(beforeTurn + ' ' + 'Win!');
+                return true;
+            }
         }
-        if (setX > 2) {
-            return true;
-        }
+        
     }
     return false;
 }
 
-const board = createBoard();
+
+
 
 //Looping game untill win
 // while (!checkWin(board.arr)) {
